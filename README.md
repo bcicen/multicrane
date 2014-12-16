@@ -26,7 +26,7 @@ And run a multicrane container with a directory of cranefiles mounted within:
 ```
 
 ```
-docker run --rm=true -ti -v /path/to/my/cranefiles:/cranfiles bcicen/multicrane <command>
+docker run --rm=true -ti -v /path/to/my/cranefiles:/cranefiles bcicen/multicrane <command>
 ```
 
 The given command will be executed for each file/host, exiting when all have completed
