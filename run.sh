@@ -1,7 +1,11 @@
 #!/bin/bash
 
+[ ! -z $1 ] && {
+    $CRANE_COMMAND = $1
+}
+
 [ -z $CRANE_COMMAND ] && {
-  echo "CRANE_COMMAND not set, defaulting to 'status'"
+  echo "CRANE_COMMAND not set and no arguments provided, defaulting to 'status'"
   CRANE_COMMAND="status"
 }
 
