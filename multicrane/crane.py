@@ -29,52 +29,71 @@ class CraneConfig(object):
        p = crane.lift('-c', self.cranefile, 
                    _env=self.env,
                    _out=self._process_out,
+                   _err=self._process_out,
+                   _out_bufsize=1,
                    _bg=True)
        self.pid = p.pid
-       log.debug('running %s' % p.cmd)
+       log.info('running %s' % p.cmd)
+       log.debug('call args: %s' % p.call_args)
 
     def pull(self):
        p = crane.pull('-c', self.cranefile, 
                    _env=self.env,
                    _out=self._process_out,
+                   _err=self._process_out,
+                   _out_bufsize=1,
                    _bg=True)
        self.pid = p.pid
-       log.debug('running %s' % p.cmd)
+       log.info('running %s' % p.cmd)
+       log.debug('call args: %s' % p.call_args)
 
     def run(self):
        p = crane.run('-c', self.cranefile,
                    _env=self.env,
                    _out=self._process_out,
+                   _err=self._process_out,
+                   _out_bufsize=1,
                    _bg=True)
        self.pid = p.pid
-       log.debug('running %s' % p.cmd)
+       log.info('running: %s' % p.cmd)
+       log.debug('call args: %s' % p.call_args)
 
     def rm(self):
        p = crane.rm('-c', self.cranefile,
                    _env=self.env,
                    _out=self._process_out,
+                   _err=self._process_out,
+                   _out_bufsize=1,
                    _bg=True)
        self.pid = p.pid
-       log.debug('running %s' % p.cmd)
+       log.info('running %s' % p.cmd)
+       log.debug('call args: %s' % p.call_args)
 
     def kill(self):
        p = crane.kill('-c', self.cranefile,
                    _env=self.env,
                    _out=self._process_out,
+                   _err=self._process_out,
+                   _out_bufsize=1,
                    _bg=True)
        self.pid = p.pid
-       log.debug('running %s' % p.cmd)
+       log.info('running %s' % p.cmd)
+       log.debug('call args: %s' % p.call_args)
 
     def status(self):
        p = crane.status('-c', self.cranefile,
                    _env=self.env,
                    _out=self._process_out,
+                   _err=self._process_out,
+                   _out_bufsize=1,
                    _bg=True)
        self.pid = p.pid
-       log.debug('running %s' % p.cmd)
+       log.info('running %s' % p.cmd)
+       log.debug('call args: %s' % p.call_args)
 
     def _process_out(self,line):
-        termcolor.cprint(self.docker_host_short + ": " + line, self.txtcolor)
+        termcolor.cprint(self.docker_host_short + ": " + line.strip('\n'), 
+                self.txtcolor)
 
     def _gethost(self):
         cf = yaml.load(open(self.cranefile, 'r'))

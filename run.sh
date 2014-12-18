@@ -1,7 +1,7 @@
 #!/bin/bash
 
 [ ! -z $1 ] && {
-    $CRANE_COMMAND = $1
+    CRANE_COMMAND=$1
 }
 
 [ -z $CRANE_COMMAND ] && {
