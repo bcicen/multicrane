@@ -2,7 +2,7 @@
 
 import os, yaml, urllib2, logging, termcolor
 from sh import crane
-from .util import randomcolor
+from util import randomcolor
 
 log = logging.getLogger()
 
@@ -25,68 +25,13 @@ class CraneConfig(object):
             return False
         return True
 
-    def lift(self):
-       p = crane.lift('-c', self.cranefile, 
-                   _env=self.env,
-                   _out=self._process_out,
-                   _err=self._process_out,
-                   _out_bufsize=1,
-                   _bg=True)
-       self.pid = p.pid
-       log.info('running %s' % p.cmd)
-       log.debug('call args: %s' % p.call_args)
-
-    def pull(self):
-       p = crane.pull('-c', self.cranefile, 
-                   _env=self.env,
-                   _out=self._process_out,
-                   _err=self._process_out,
-                   _out_bufsize=1,
-                   _bg=True)
-       self.pid = p.pid
-       log.info('running %s' % p.cmd)
-       log.debug('call args: %s' % p.call_args)
-
-    def run(self):
-       p = crane.run('-c', self.cranefile,
-                   _env=self.env,
-                   _out=self._process_out,
-                   _err=self._process_out,
-                   _out_bufsize=1,
-                   _bg=True)
-       self.pid = p.pid
-       log.info('running: %s' % p.cmd)
-       log.debug('call args: %s' % p.call_args)
-
-    def rm(self):
-       p = crane.rm('-c', self.cranefile,
-                   _env=self.env,
-                   _out=self._process_out,
-                   _err=self._process_out,
-                   _out_bufsize=1,
-                   _bg=True)
-       self.pid = p.pid
-       log.info('running %s' % p.cmd)
-       log.debug('call args: %s' % p.call_args)
-
-    def kill(self):
-       p = crane.kill('-c', self.cranefile,
-                   _env=self.env,
-                   _out=self._process_out,
-                   _err=self._process_out,
-                   _out_bufsize=1,
-                   _bg=True)
-       self.pid = p.pid
-       log.info('running %s' % p.cmd)
-       log.debug('call args: %s' % p.call_args)
-
-    def status(self):
-       p = crane.status('-c', self.cranefile,
-                   _env=self.env,
-                   _out=self._process_out,
-                   _err=self._process_out,
-                   _out_bufsize=1,
-                   _bg=True)
+    def __getattr__(self, name):
+       p = crane(name, '-c', self.cranefile, 
+                 _env=self.env,
+                 _out=self._process_out,
+                 _err=self._process_out,
+                 _out_bufsize=1,
+                 _bg=True)
        self.pid = p.pid
        log.info('running %s' % p.cmd)
        log.debug('call args: %s' % p.call_args)

@@ -30,22 +30,22 @@ def main():
         exit(1)
     if args.command == 'lift':
         for c in cranes:
-            c.lift()
+            c.lift
     if args.command == 'pull':
         for c in cranes:
-            c.pull()
+            c.pull
     if args.command == 'run':
         for c in cranes:
-            c.run()
+            c.run
     if args.command == 'rm':
         for c in cranes:
-            c.rm()
+            c.rm
     if args.command == 'kill':
         for c in cranes:
-            c.kill()
+            c.kill
     if args.command == 'status':
         for c in cranes:
-            c.status()
+            c.status
 
     print(check_running(cranes))
 
