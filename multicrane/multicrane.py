@@ -28,24 +28,8 @@ def main():
     if args.command not in commands:
         log.error('Unknown command %s' % args.command)
         exit(1)
-    if args.command == 'lift':
-        for c in cranes:
-            c.lift
-    if args.command == 'pull':
-        for c in cranes:
-            c.pull
-    if args.command == 'run':
-        for c in cranes:
-            c.run
-    if args.command == 'rm':
-        for c in cranes:
-            c.rm
-    if args.command == 'kill':
-        for c in cranes:
-            c.kill
-    if args.command == 'status':
-        for c in cranes:
-            c.status
+    for c in cranes:
+        c.__getattr__(args.command)
 
     print(check_running(cranes))
 
